@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Data Bot</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #1e1e2f;
+            color: #ffffff;
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid #333;
+        }
+        header img {
+            height: 50px;
+        }
+        .chat-box {
+            margin: 40px 0;
+        }
+        .chat-box input {
+            width: calc(100% - 120px);
+            padding: 15px;
+            background-color: #2e2e3e;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            font-size: 16px;
+        }
+        .chat-box button {
+            padding: 15px;
+            background-color: #4c4caf;
+            border: none;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            margin-left: 10px;
+            border-radius: 5px;
+        }
+        .chat-box button:hover {
+            background-color: #3b3b9c;
+        }
+        .chat-output {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #292939;
+            border-radius: 5px;
+            min-height: 200px;
+            color: #b0b0c7;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <!-- Replace with your logo -->
+            <img src="/static/logo.png" alt="Logo" />
+            <h1>AI Data Insights Bot</h1>
+        </header>
+        <div class="chat-box">
+            <input type="text" id="question" placeholder="Ask a question about the data...">
+            <button onclick="askQuestion()">Ask</button>
+        </div>
+        <div class="chat-output" id="answer-output">
+            <!-- Answer will appear here -->
+        </div>
+    </div>
+
+    <script>
+        function askQuestion() {
+            const question = document.getElementById('question').value;
+
+            fetch('/ask', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ question: question })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('answer-output').innerHTML = `<p>${data.answer}</p>`;
+            });
+        }
+    </script>
+</body>
+</html>
