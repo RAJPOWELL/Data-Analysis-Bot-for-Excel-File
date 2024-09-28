@@ -1,4 +1,3 @@
-# app.py
 import os
 import pandas as pd
 from flask import Flask, request, jsonify, render_template
@@ -7,7 +6,6 @@ import openai
 # Load OpenAI API key
 openai.api_key = ''
 
-# Load Excel data into a Pandas DataFrame
 df = pd.read_excel("")  # Load the correct file
 
 # Flask app
